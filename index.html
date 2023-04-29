@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tu nombre de árbol</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		body {
+			background-color: #F5F5F5;
+		}
+		.contenedor {
+			width: 500px;
+			margin: 0 auto;
+			padding-top: 50px;
+			text-align: center;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			color: #333333;
+			background-color: #ECECEC;
+			border-radius: 10px;
+			box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+		}
+		input[type=text] {
+			padding: 10px;
+			margin: 10px;
+			border-radius: 5px;
+			border: none;
+			background-color: #FFFFFF;
+			box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+		}
+		input[type=submit] {
+			padding: 10px;
+			margin: 10px;
+			border-radius: 5px;
+			border: none;
+			background-color: #008CBA;
+			color: #FFFFFF;
+			cursor: pointer;
+			box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+		}
+		.resultado {
+			font-size: 24px;
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="contenedor">
+		<h1>Tu nombre de árbol</h1>
+		<form onsubmit="return mostrar_nombre_arbol()" method="POST">
+			<label for="nombre">Introduce tu nombre:</label>
+			<br>
+			<input type="text" id="nombre" name="nombre" required>
+			<br>
+			<input type="submit" value="Obtener mi árbol">
+		</form>
+		<p id="resultado_nombre_arbol" class="resultado"></p>
+	</div>
+	<script type="text/javascript">
+		function mostrar_nombre_arbol() {
+			var nombre = document.getElementById("nombre").value;
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("resultado_nombre_arbol").innerHTML = "Tu nombre de árbol es: " + this.responseText;
+				}
+			};
+			xmlhttp.open("POST", "arboles.py", true);
+			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xmlhttp.send("nombre=" + nombre);
+			return false;
+		}
+	</script>
+</body>
+</html>
