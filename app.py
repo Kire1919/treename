@@ -21,12 +21,13 @@ def generar_nombre_arbol(nombre):
 def obtener_nombre_arbol():
     nombre = request.args.get('nombre', '')
     nombre_arbol = generar_nombre_arbol(nombre)
-    comando = ['python', 'arboles.py', nombre_arbol]
+    comando = ['python', './arboles.py', nombre_arbol]
     try:
         resultado = subprocess.check_output(comando, cwd='C:/miapp')
         return jsonify({'nombre_arbol': nombre_arbol, 'resultado': resultado.decode()})
     except subprocess.CalledProcessError as error:
         return jsonify({'error': str(error)}), 500
+
 
 
 if __name__ == '__main__':
