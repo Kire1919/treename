@@ -10,7 +10,9 @@ arboles = ["abedul", "abeto", "acacia", "acebo", "achicoria", "álamo", "árbo
 def generar_nombre_arbol(nombre):
     suma_ascii = sum(ord(c) for c in nombre)
     indice_arbol = suma_ascii % len(arboles)
+    print("Indice del árbol:", indice_arbol) 
     return arboles[indice_arbol]
+
 
 @app.route('/arboles')
 def obtener_nombre_arbol():
