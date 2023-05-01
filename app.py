@@ -7,7 +7,7 @@ app = Flask(__name__)
 def arboles():
     nombre = request.args.get('nombre', '')
     try:
-        resultado = subprocess.check_output(['python', 'arboles.py', nombre])
+        resultado = subprocess.check_output(['python', 'arboles.py', nombre], cwd='C:/miapp')
         return jsonify({'arbol': resultado.decode().strip()})
     except subprocess.CalledProcessError:
         return jsonify({'error': 'No se ha podido generar el árbol'})
