@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+	<script src="arbol.js"></script>
+
+	<script>
+		function enviar_datos() {
+			var xmlhttp = new XMLHttpRequest();
+			var nombre = document.getElementById("nombre").value;
+			var url = "miapp/arboles.py?nombre=" + nombre;
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("resultado_nombre_arbol").innerHTML = "Tu nombre de árbol es: " + this.responseText;
+				}
+			};
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+		}
+	</script>
+
 	<title>Tu nombre de árbol</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +44,9 @@
 			border: none;
 			background-color: #FFFFFF;
 			box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+			width: 80%;
+			font-size: 16px;
+			font-weight: 500;
 		}
 		input[type=submit] {
 			padding: 10px;
@@ -36,6 +57,9 @@
 			color: #FFFFFF;
 			cursor: pointer;
 			box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+			width: 80%;
+			font-size: 16px;
+			font-weight: 500;
 		}
 		.resultado {
 			font-size: 24px;
@@ -44,31 +68,18 @@
 	</style>
 </head>
 <body>
+
 	<div class="contenedor">
 		<h1>Tu nombre de árbol</h1>
-		<form onsubmit="return mostrar_nombre_arbol()" method="POST">
+		<form onsubmit="return false;">
 			<label for="nombre">Introduce tu nombre:</label>
 			<br>
 			<input type="text" id="nombre" name="nombre" required>
 			<br>
-			<input type="submit" value="Obtener mi árbol">
+			<input type="submit" value="Obtener mi árbol" onclick="enviar_datos()">
 		</form>
 		<p id="resultado_nombre_arbol" class="resultado"></p>
 	</div>
-	<script type="text/javascript">
-		function mostrar_nombre_arbol() {
-			var nombre = document.getElementById("nombre").value;
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("resultado_nombre_arbol").innerHTML = "Tu nombre de árbol es: " + this.responseText;
-				}
-			};
-			xmlhttp.open("POST", "arboles.py", true);
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp.send("nombre=" + nombre);
-			return false;
-		}
-	</script>
+	
 </body>
 </html>
