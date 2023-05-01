@@ -1,6 +1,6 @@
 function obtenerArbol() {
     var nombre = document.getElementById("nombre").value;
-    var url = "https://kire1919.github.io/treename/miapp/arboles.py?nombre=" + nombre;
+    var url = "/arboles?nombre=" + nombre;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
